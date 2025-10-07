@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Contact — Jack Sweeney</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<h1 class="site-title">Contact</h1>
+			<nav>
+				<ul class="nav">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About Me</a></li>
+					<li><a href="resume.html">Resume</a></li>
+					<li><a href="projects.html">Projects</a></li>
+					<li><a href="contact.html" aria-current="page">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<section>
+			<h2>Get in Touch</h2>
+			<p>
+				You can reach me directly at 
+				<a href="mailto:japsween@iu.edu">japsween@iu.edu</a>, 
+				connect with me on 
+				<a href="https://www.linkedin.com/in/jackson-sweeney/" target="_blank" rel="noopener">
+					LinkedIn
+				</a>,
+				or view my projects on 
+				<a href="https://github.com/jacksweeney906" target="_blank" rel="noopener">
+					GitHub
+				</a>.
+			</p>
+
+			<form id="contactForm" action="thankyou.html" method="get" novalidate>
+				<div class="form-row">
+					<label for="firstName">First Name</label>
+					<input id="firstName" name="firstName" type="text" required>
+					<span class="error" id="firstNameError" aria-live="polite"></span>
+				</div>
+
+				<div class="form-row">
+					<label for="lastName">Last Name</label>
+					<input id="lastName" name="lastName" type="text" required>
+					<span class="error" id="lastNameError" aria-live="polite"></span>
+				</div>
+
+				<div class="form-row">
+					<label for="email">Your Email Address</label>
+					<input id="email" name="email" type="email" required>
+					<span class="error" id="emailError" aria-live="polite"></span>
+				</div>
+
+				<div class="form-row">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" rows="5" required></textarea>
+					<span class="error" id="messageError" aria-live="polite"></span>
+				</div>
+
+				<p class="form-actions">
+					<button type="submit" class="btn">Send Message</button>
+				</p>
+			</form>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>&copy; 2025 Jack Sweeney</p>
+		</div>
+	</footer>
+
+	<script>
+		// Simple client-side validation for better user feedback
+		(function(){
+			const form = document.getElementById('contactForm');
+
+			function showError(input, message) {
+				const el = document.getElementById(input.id + 'Error');
+				el.textContent = message;
+				input.setAttribute('aria-invalid', message ? 'true' : 'false');
+			}
+
+			function validate() {
+				let ok = true;
+				if (!form.firstName.value.trim()) { showError(form.firstName, 'First name is required'); ok = false; } else showError(form.firstName, '');
+				if (!form.lastName.value.trim()) { showError(form.lastName, 'Last name is required'); ok = false; } else showError(form.lastName, '');
+				if (!form.email.checkValidity()) { showError(form.email, 'Enter a valid email address'); ok = false; } else showError(form.email, '');
+				if (!form.message.value.trim()) { showError(form.message, 'Please enter a message'); ok = false; } else showError(form.message, '');
+				return ok;
+			}
+
+			form.addEventListener('submit', function(e){
+				if (!validate()) e.preventDefault();
+			});
+		})();
+	</script>
+</body>
+</html>
